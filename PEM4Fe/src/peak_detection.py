@@ -110,7 +110,7 @@ class PeakDetectionModule:
             ax.hlines(peak_info['mean'], t[peak_left], t[peak_right], color="r", linestyle="--")
         
 
-    def plot_density_analysis(self, ax, ax_twin, N, peaks_info, column_name, num_density=-1):
+    def plot_density_analysis(self, ax, ax_twin, N, peaks_info, column_name, num_density=-1 ,fit_result=None):
         """
         绘制右侧子图，显示峰值密集度分析和直方图。
         
@@ -123,6 +123,7 @@ class PeakDetectionModule:
         - column_name (str): 数据列名。
         - directory_path (str): 保存结果的目录路径。
         - num_density (int): 检测的密集区域峰值数量，默认 -1 表示检测所有峰值。
+        - fit_result (dict): 增长拟合结果字典。
         
         返回:
         - list: 包含密集区域峰值信息的列表。
@@ -130,7 +131,6 @@ class PeakDetectionModule:
         self.logger.info(f"开始绘制密集区域分析图 for {column_name}...")
         widths = [info['width'] for info in peaks_info]
         means = [info['mean'] for info in peaks_info]
-
         Nsc, N0 = self.Nsc, self.N0
         
         if means:
@@ -147,11 +147,16 @@ class PeakDetectionModule:
         ax.set_title(f"{column_name} Density Analysis")
         
         # 绘制原始直方图
-        ax_twin.hist(N[N >= N_cut], bins=2000, orientation='horizontal', alpha=0.6, color='gray', label='(N | N >= Nsc) Distribution')
+        if fit_result != None:
+            start_index = fit_result['line_idx']
+            N_smooth = N[start_index:]
+        else:
+            N_smooth = N[(N >= N_cut) & (N <= ymax)]
+            
+        ax_twin.hist(N_smooth, bins=2000, orientation='horizontal', alpha=0.6, color='gray', label='(N | N >= Nsc) Distribution')
 
         # 计算直方图数据
-        N_smooth = N[(N >= N_cut) & (N <= ymax)]
-        counts, bin_edges = np.histogram(N_smooth, bins=1000)
+        counts, bin_edges = np.histogram(N_smooth[N_smooth>=N_cut], bins=1000)
         bin_centers = 0.5 * (bin_edges[1:] + bin_edges[:-1])
 
         # 对直方图数据进行高斯平滑
@@ -278,7 +283,7 @@ class PeakDetectionModule:
         return start_idx, end_idx, interval_mean
 
 
-    def plot_plateaus(self, ax, t, N, density_info, column_name):
+    def plot_plateaus(self, ax, t, N, density_info, column_name, fit_result=None):
         '''
         绘制平台检测结果，并保存图像。
 
@@ -313,6 +318,15 @@ class PeakDetectionModule:
                 "mean": N_forecast,
                 "indices": range(start_index, end_index + 1)
             })
+        print("\n\n\n\n")
+        print(fit_result)
+
+        if fit_result != None:
+            t_fit = fit_result['t_fit']
+            N_fit = fit_result['N_fit']
+            ax.plot(t_fit, N_fit, label="Fitted Curve", color="orange")
+            cut_line = fit_result['line_idx']
+            ax.vlines(cut_line, np.min(N_fit), np.max(N_fit), color='orange', linestyle='dashed', label='Cut Line')
 
         ax.set_title(f"Peak Detection for {column_name}")
         ax.set_ylim(self.N0*0.9, np.max(N)*1.1)
@@ -324,7 +338,7 @@ class PeakDetectionModule:
         return plateau_info
 
 
-    def plot_analysis_figure(self, t, N, peaks_info, column_name, num_density=None):
+    def plot_analysis_figure(self, t, N, peaks_info, column_name, fit_result=None, num_density=None):
         """
         绘制分析图，有两个子图。
 
@@ -352,9 +366,8 @@ class PeakDetectionModule:
         self.plot_peaks(ax1, t, N, peaks_info, column_name)
 
         # 绘制右侧子图 ax2
-        density_info = self.plot_density_analysis(ax2, ax2_twin, N, peaks_info, column_name, num_density)
-
-        plateaus_info = self.plot_plateaus(ax1, t, N, density_info, column_name)
+        density_info = self.plot_density_analysis(ax2, ax2_twin, N, peaks_info, column_name, num_density, fit_result)
+        plateaus_info = self.plot_plateaus(ax1, t, N, density_info, column_name, fit_result)
 
         # 设置整体标题
         plt.suptitle(f'{column_name} Analysis')
