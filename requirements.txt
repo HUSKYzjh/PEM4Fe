@@ -1,0 +1,7 @@
+pyyaml
+jsonschema
+pandas
+numpy
+matplotlib
+scipy
+argparse
