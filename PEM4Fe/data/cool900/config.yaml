@@ -1,11 +1,11 @@
-N0: 2600.0
-Nsc: 3900.0
+N0: 1200.0
+Nsc: 1800.0
 initial_fit_points: 3
-input_dir: C:\Users\husky\Desktop\peek-find\PEM4Fe\data\cool700\nc2600
+input_dir: C:\Users\husky\Desktop\peek-find\PEM4Fe\data\cool900\nc1200
 max_iterations: 100
 min_r_squared: 0.95
 num_density: 6
-output_dir: C:\Users\husky\Desktop\peek-find\PEM4Fe\data\output-700
+output_dir: C:\Users\husky\Desktop\peek-find\PEM4Fe\data\output-900
 pressure: 360.0
 width_threshold: 10
 plateau_size: 0

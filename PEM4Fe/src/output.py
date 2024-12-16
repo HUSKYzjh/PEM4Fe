@@ -26,6 +26,14 @@ class MainModule:
         self.overall_path = os.path.join(self.output_dir, "3_overall_analysis_plots")
         os.makedirs(self.overall_path, exist_ok=True)
 
+        # 调用日志设置函数
+        log_file = "application.log"
+        setup_logging(output_dir=self.output_dir, log_file=log_file, level=logging.DEBUG)
+        
+        # 为当前类实例创建特定的日志记录器
+        self.logger = logging.getLogger(self.__class__.__name__)
+
+
     def save_results_to_csv(self, Peak, Plateaus):
         """保存分析结果到 CSV 文件"""
         
@@ -134,11 +142,6 @@ class MainModule:
 
     def All_PTM(self,show_output=False):
         
-        log_file = "application.log"
-
-        # 调用日志设置函数
-        setup_logging(output_dir=self.output_dir, log_file=log_file, level=logging.DEBUG)
-
         self.overall_path = os.path.join(self.output_dir, "3_overall_analysis_plots")
         os.makedirs(self.overall_path, exist_ok=True)
 

@@ -58,10 +58,12 @@ def setup_logging(output_dir="./logs", log_file="app.log", level=logging.INFO):
         level=level,  # 设置日志级别
         format=log_format,  # 设置日志格式
         handlers=[
-            logging.FileHandler(log_file_path),  # 将日志写入文件
+            logging.FileHandler(log_file_path, encoding="utf-8"),  # 将日志写入文件
             logging.StreamHandler()             # 同时输出到控制台
         ]
     )
+    # 将 matplotlib 的日志级别设置为 WARNING
+    logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
     # 测试日志
     logging.info(f"日志文件保存路径: {log_file_path}")
