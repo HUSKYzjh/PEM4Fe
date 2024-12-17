@@ -1,0 +1,39 @@
+Metadata-Version: 2.1
+Name: PEM4Fe
+Version: 1.0.2
+Summary: A tool for data processing and peak detection for PEM
+Home-page: https://github.com/HUSKYzjh/PEM4Fe
+Author: Jiahui Zhai
+Author-email: 19720212203881@stu.xmu.edu.cn
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: matplotlib
+Requires-Dist: numpy
+Requires-Dist: pandas
+Requires-Dist: pyyaml
+Requires-Dist: scipy
+
+```
+PEM4Fe/
+├── src/                  # 核心代码
+│   ├── config.py
+│   ├── fitting.py
+│   ├── peak_detection.py
+│   └── output.py
+├── tests/                # 测试文件
+│   ├── test_config.py
+│   ├── test_fitting.py
+│   ├── test_peak_detection.py
+│   └── test_output.py
+├── data/                 # 数据目录（原始数据）
+├── logs/                 # 日志文件目录
+├── output/               # 程序输出目录
+├── requirements.txt      # 依赖库文件
+├── README.md             # 项目说明文件
+└── PEM4Fe.py               # 主程序入口
+
+```

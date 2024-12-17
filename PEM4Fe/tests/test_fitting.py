@@ -1,7 +1,7 @@
 import unittest
 import numpy as np
 import os
-from src.fitting import FittingModule
+from PEM4Fe.fitting import FittingModule
 
 class TestFittingModule(unittest.TestCase):
     @classmethod

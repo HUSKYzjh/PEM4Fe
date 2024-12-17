@@ -3,9 +3,9 @@ from unittest.mock import MagicMock, patch
 import os
 import numpy as np
 import pandas as pd
-from src.output import MainModule
-from src.peak_detection import PeakDetectionModule
-from src.fitting import FittingModule
+from PEM4Fe.output import MainModule
+from PEM4Fe.peak_detection import PeakDetectionModule
+from PEM4Fe.fitting import FittingModule
 import yaml
 
 class TestMainModule(unittest.TestCase):

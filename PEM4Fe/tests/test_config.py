@@ -4,7 +4,7 @@ import logging
 import tempfile
 import json
 import yaml
-from src.config import load_config, setup_logging
+from PEM4Fe.config import load_config, setup_logging
 
 class TestConfig(unittest.TestCase):
     """测试 config.py 中的函数"""

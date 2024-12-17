@@ -1,0 +1,2 @@
+[console_scripts]
+PEM4Fe = PEM4Fe.main:main

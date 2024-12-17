@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "./PEM4Fe"
+        "./PEM4Fe",
+        "./PEM4Fe/src"
     ]
 }

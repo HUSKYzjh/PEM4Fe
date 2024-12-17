@@ -2,7 +2,7 @@ import unittest
 import os
 import pandas as pd
 import numpy as np
-from src.data_processing import collect_data_from_files, clean_data, save_to_csv
+from PEM4Fe.data_processing import collect_data_from_files, clean_data, save_to_csv
 
 class TestDataProcessing(unittest.TestCase):
 

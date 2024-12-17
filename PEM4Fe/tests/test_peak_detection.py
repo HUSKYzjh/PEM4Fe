@@ -2,7 +2,7 @@ import unittest
 import numpy as np
 import os
 import matplotlib.pyplot as plt
-from src.peak_detection import PeakDetectionModule
+from PEM4Fe.peak_detection import PeakDetectionModule
 
 class TestPeakDetectionModule(unittest.TestCase):
 

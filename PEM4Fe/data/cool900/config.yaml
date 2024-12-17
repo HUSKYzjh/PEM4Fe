@@ -7,7 +7,7 @@ min_r_squared: 0.95
 num_density: 6
 output_dir: C:\Users\husky\Desktop\peek-find\PEM4Fe\data\output-900
 pressure: 360.0
-width_threshold: 10
+width_threshold: 8
 plateau_size: 0
-window_size: 10
-tolerance_ratio: 0.1
+window_size: 3
+tolerance_ratio: 0.05
